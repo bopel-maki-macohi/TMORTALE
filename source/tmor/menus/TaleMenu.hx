@@ -26,7 +26,7 @@ class TaleMenu extends FlxState
 
 		for (i => entry in entries)
 		{
-			var newSpr:FlxSprite = new FlxSprite(i * 256, 0);
+			var newSpr:FlxSprite = new FlxSprite(i * 256, 0, 'assets/tales/${entry.toLowerCase()}/icon.png');
 			newSpr.ID = i;
 			newSpr.screenCenter(X);
 			spriteGrp.add(newSpr);
