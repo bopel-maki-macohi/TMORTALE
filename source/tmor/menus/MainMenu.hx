@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
@@ -11,7 +12,7 @@ class MainMenu extends FlxState
 {
 	var entries:Array<String> = ['Tales',];
 
-	var textGrp:FlxTypedGroup<FlxText>;
+	var textGrp:FlxTypedSpriteGroup<FlxText>;
 
 	var camFollow:FlxObject;
 
@@ -21,7 +22,7 @@ class MainMenu extends FlxState
 	{
 		super.create();
 
-		textGrp = new FlxTypedGroup<FlxText>();
+		textGrp = new FlxTypedSpriteGroup<FlxText>();
 		add(textGrp);
 
 		for (i => entry in entries)
