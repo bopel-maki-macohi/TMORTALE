@@ -11,7 +11,7 @@ import lime.tools.*;
 class Project extends HXProject
 {
 	final TITLE:String = "TMOR Tale";
-	final VERSION:Array<Int> = [0, 0, 0, 1];
+	final VERSION:Array<Int> = [0, 1, 0];
 	final COMPANY:String = "Maki";
 	final PACKAGE:String = "com.maki.tmortale";
 
