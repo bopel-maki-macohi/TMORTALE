@@ -26,13 +26,13 @@ class TaleMenu extends FlxState
 
 		for (i => entry in entries)
 		{
-			var newSpr:FlxSprite = new FlxSprite(i * 256, 0, 'assets/tales/${entry.toLowerCase()}/icon.png');
+			var newSpr:FlxSprite = new FlxSprite(i * 256, 0, 'tales/${entry.toLowerCase()}/icon'.getPresetPath('image'));
 			newSpr.ID = i;
-			newSpr.screenCenter(X);
+			newSpr.screenCenter(Y);
 			spriteGrp.add(newSpr);
 		}
 
-		camFollow = new FlxObject(0, 0, FlxG.width, FlxG.height);
+		camFollow = new FlxObject(0, FlxG.height / 2);
 		add(camFollow);
 
 		FlxG.camera.follow(camFollow, LOCKON, .4);
@@ -68,7 +68,7 @@ class TaleMenu extends FlxState
 
 			if (sprite.ID == curSelection)
 			{
-				camFollow.x = -(FlxG.width * 0.5) + sprite.x;
+				camFollow.x = sprite.x;
 				sprite.color = FlxColor.YELLOW;
 			}
 		}
