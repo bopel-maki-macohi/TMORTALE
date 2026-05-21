@@ -8,11 +8,11 @@ import lime.tools.*;
 class Project extends HXProject
 {
 	final TITLE:String = "TMOR Tale";
-	final VERSION:Array<Int> = [0, 1, 0, 0];
+	final VERSION:Array<Int> = [0, 0, 0, 1];
 	final COMPANY:String = "Maki";
 	final PACKAGE:String = "com.maki.tmortale";
 
-	final MAIN_CLASS:String = "Main";
+	final MAIN_CLASS:String = "tmor.Main";
 	final FILE_NAME:String = "TMOR";
 	final PRELOADER:String = "flixel.system.FlxPreloader";
 
@@ -87,6 +87,7 @@ class Project extends HXProject
 
 	function setupMacros()
 	{
+		addMacro("include('tmor', true)");
 		addMacro("include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap'])");
 	}
 

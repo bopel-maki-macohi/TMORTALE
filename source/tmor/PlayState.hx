@@ -1,4 +1,4 @@
-package;
+package tmor;
 
 import flixel.FlxState;
 
