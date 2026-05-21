@@ -1,0 +1,141 @@
+import haxe.io.Bytes;
+import hxp.*;
+import lime.tools.*;
+
+/**
+ * The engine"s project class.
+ */
+class Project extends HXProject
+{
+	final TITLE:String = "TMOR Tale";
+	final VERSION:Array<Int> = [0, 1, 0, 0];
+	final COMPANY:String = "Maki";
+	final PACKAGE:String = "com.maki.tmortale";
+
+	final MAIN_CLASS:String = "Main";
+	final FILE_NAME:String = "TMOR";
+	final PRELOADER:String = "flixel.system.FlxPreloader";
+
+	final WIDTH:Int = 1280;
+	final HEIGHT:Int = 720;
+
+	public function new()
+	{
+		super();
+
+		meta.title = TITLE;
+		meta.version = VERSION.join('.');
+		meta.company = COMPANY;
+		meta.packageName = PACKAGE;
+
+		app.main = MAIN_CLASS;
+		app.file = FILE_NAME;
+		app.preloader = PRELOADER;
+
+		window.width = WIDTH;
+		window.height = HEIGHT;
+		window.fps = 60;
+		window.background = 0x000000;
+		window.hardware = true;
+		window.vsync = false;
+
+		window.orientation = Orientation.LANDSCAPE;
+		window.fullscreen = false;
+		window.resizable = true;
+
+		sources.push("source");
+		// icons.push(new Icon("art/icon.png"));
+
+		includeAssets("assets");
+
+		setupBuildPath();
+		setupDefines();
+		setupMacros();
+		setupHaxelibs();
+	}
+
+	function setupBuildPath()
+	{
+		var path:String = "release";
+
+		if (isDebug())
+			path = "debug";
+
+		// Sets the export path
+		// On debug, it"s "export/debug"
+		// On release, it"s "export/release"
+		app.path = 'export/$path';
+	}
+
+	function setupDefines()
+	{
+		// Flixel
+		setHaxedef("FLX_NO_HEALTH");
+		setHaxedef("FLX_NO_FOCUS_LOST_SCREEN");
+		if (!isDebug())
+			setHaxedef("FLX_NO_DEBUG");
+		setHaxedef("NAPE_RELEASE_BUILD");
+
+		// This stops Lime's AssetCache class from recompiling every single time
+		// I promise you doing this does nothing bad
+		setHaxedef("lime_disable_assets_version");
+
+		// Makes message reporting nice and pretty
+		// Remove this line if you"re lame
+		setHaxedef("message.reporting", "pretty");
+	}
+
+	function setupMacros()
+	{
+		addMacro("include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap'])");
+	}
+
+	function setupHaxelibs()
+	{
+		addHaxelib("flixel");
+	}
+
+	function setHaxedef(name:String, ?value:String)
+	{
+		haxedefs.set(name, value ?? "");
+	}
+
+	function addHaxelib(name:String)
+	{
+		haxelibs.push(new Haxelib(name));
+	}
+
+	function addMacro(name:String)
+	{
+		haxeflags.push('--macro $name');
+	}
+
+	//
+	// LOGGING
+	//
+
+	function error(message:String)
+	{
+		Sys.stderr().write(Bytes.ofString(message));
+		Sys.exit(1);
+	}
+
+	//
+	// CONDITIONALS
+	//
+
+	function isCPP():Bool
+	{
+		return defines.exists("cpp");
+	}
+
+	function isWeb():Bool
+	{
+		return platformType == PlatformType.WEB;
+	}
+
+	function isDebug():Bool
+	{
+		return debug;
+	}
+}
