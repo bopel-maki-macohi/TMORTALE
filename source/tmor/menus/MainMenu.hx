@@ -1,0 +1,84 @@
+package tmor.menus;
+
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxState;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+
+class MainMenu extends FlxState
+{
+	var entries:Array<String> = [
+		'TestOption1',
+		'TestOption2',
+		'TestOption3',
+		'TestOption4',
+		'TestOption5',
+		'TestOption6',
+		'TestOption7',
+		'TestOption8',
+		'TestOption9',
+		'TestOption0',
+	];
+
+	var textGrp:FlxTypedGroup<FlxText>;
+
+	var camFollow:FlxObject;
+
+	var curSelection:Int = 0;
+
+	override function create()
+	{
+		super.create();
+
+		textGrp = new FlxTypedGroup<FlxText>();
+		add(textGrp);
+
+		for (i => entry in entries)
+		{
+			var newText:FlxText = new FlxText(0, i * 64, 0, entry, 16);
+			newText.ID = i;
+			newText.screenCenter(X);
+			textGrp.add(newText);
+		}
+
+		camFollow = new FlxObject(0, 0, FlxG.width, FlxG.height);
+		add(camFollow);
+
+		FlxG.camera.follow(camFollow, LOCKON, .4);
+
+		changeSelection(0);
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (FlxG.keys.anyJustPressed([W, UP]))
+			changeSelection(-1);
+		if (FlxG.keys.anyJustPressed([S, DOWN]))
+			changeSelection(1);
+	}
+
+	function changeSelection(by:Int)
+	{
+		curSelection += by;
+
+		if (curSelection < 0)
+			curSelection = textGrp.members.length - 1;
+		if (curSelection > textGrp.members.length - 1)
+			curSelection = 0;
+
+		for (text in textGrp)
+		{
+			text.color = FlxColor.WHITE;
+
+			if (text.ID == curSelection)
+			{
+				camFollow.y = -(FlxG.height * 0.75) + text.y;
+				text.color = FlxColor.YELLOW;
+			}
+		}
+	}
+}

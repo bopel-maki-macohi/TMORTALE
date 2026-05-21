@@ -1,16 +1,20 @@
 package tmor;
 
+import flixel.FlxG;
 import flixel.FlxState;
+import tmor.menus.MainMenu;
 
 class InitState extends FlxState
 {
 	override public function create()
 	{
 		super.create();
+
+		FlxG.switchState(() -> getInitialState());
 	}
 
-	override public function update(elapsed:Float)
+	function getInitialState():FlxState
 	{
-		super.update(elapsed);
+		return new MainMenu();
 	}
 }

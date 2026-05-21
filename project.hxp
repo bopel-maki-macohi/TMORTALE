@@ -72,7 +72,7 @@ class Project extends HXProject
 
 	function setupDefines()
 	{
-		setHaxedef('-dce full');
+		addHaxeFlag('-dce full');
 
 		// Flixel
 		setHaxedef("FLX_NO_HEALTH");
@@ -104,6 +104,11 @@ class Project extends HXProject
 	function setHaxedef(name:String, ?value:String)
 	{
 		haxedefs.set(name, value ?? "");
+	}
+	
+	function addHaxeFlag(value:String):Void
+	{
+		this.haxeflags.push(value);
 	}
 
 	function addHaxelib(name:String)
