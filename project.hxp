@@ -69,6 +69,8 @@ class Project extends HXProject
 
 	function setupDefines()
 	{
+		setHaxedef('-dce full');
+
 		// Flixel
 		setHaxedef("FLX_NO_HEALTH");
 		setHaxedef("FLX_NO_FOCUS_LOST_SCREEN");
@@ -87,8 +89,8 @@ class Project extends HXProject
 
 	function setupMacros()
 	{
-		addMacro("include('tmor', true)");
-		addMacro("include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap'])");
+		// addMacro("include('tmor', true)");
+		// addMacro("include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap'])");
 	}
 
 	function setupHaxelibs()
