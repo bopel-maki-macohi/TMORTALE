@@ -33,7 +33,7 @@ class MainMenu extends FlxState
 			textGrp.add(newText);
 		}
 
-		camFollow = new FlxObject(0, 0, FlxG.width, FlxG.height);
+		camFollow = new FlxObject(FlxG.width / 2, FlxG.height / 2);
 		add(camFollow);
 
 		FlxG.camera.follow(camFollow, LOCKON, .4);

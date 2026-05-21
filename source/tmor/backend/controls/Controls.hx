@@ -9,4 +9,6 @@ class Controls
 	public static var ui_right:Control = new Control('ui_right', [D, RIGHT]);
 
 	public static var accept:Control = new Control('accept', [ENTER]);
+
+	public static var leave:Control = new Control('leave', [ESCAPE]);
 }

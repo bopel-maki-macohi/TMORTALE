@@ -32,7 +32,7 @@ class TaleMenu extends FlxState
 			spriteGrp.add(newSpr);
 		}
 
-		camFollow = new FlxObject(0, FlxG.height / 2);
+		camFollow = new FlxObject(FlxG.width / 2, FlxG.height / 2);
 		add(camFollow);
 
 		FlxG.camera.follow(camFollow, LOCKON, .4);
@@ -51,6 +51,11 @@ class TaleMenu extends FlxState
 
 		if (Controls.accept.justPressed)
 			select();
+
+		#if !TALESMENU
+		if (Controls.leave.justPressed)
+			FlxG.switchState(() -> new MainMenu());
+		#end
 	}
 
 	function changeSelection(by:Int)
