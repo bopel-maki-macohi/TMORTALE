@@ -6,16 +6,28 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import tmor.menus.tales.SincoTaleSelect;
 
 class TaleMenu extends FlxState
 {
-	var entries:Array<String> = ['Sinco', 'Portilizen', 'D-Sides Maki',];
+	var entries:Array<String> = [
+		'Sinco',
+		// 'Portilizen',
+		// 'D-Sides Maki',
+	];
 
 	var spriteGrp:FlxSpriteGroup;
 
 	var camFollow:FlxObject;
 
 	var curSelection:Int = 0;
+
+	var taleFile:String = 'icon';
+
+	function getEntryPath(entry:String)
+	{
+		return 'tales/${entry.toLowerCase()}/icon'.getPresetPath('image');
+	}
 
 	override function create()
 	{
@@ -26,7 +38,7 @@ class TaleMenu extends FlxState
 
 		for (i => entry in entries)
 		{
-			var newSpr:FlxSprite = new FlxSprite(i * 256, 0, 'tales/${entry.toLowerCase()}/icon'.getPresetPath('image'));
+			var newSpr:FlxSprite = new FlxSprite(i * 256, 0, getEntryPath(entry));
 			newSpr.ID = i;
 			newSpr.screenCenter(Y);
 			spriteGrp.add(newSpr);
@@ -52,6 +64,11 @@ class TaleMenu extends FlxState
 		if (Controls.accept.justPressed)
 			select();
 
+		leaveControls();
+	}
+
+	function leaveControls()
+	{
 		#if !TALESMENU_STARTING
 		if (Controls.leave.justPressed)
 			FlxG.switchState(() -> new MainMenu());
@@ -85,6 +102,9 @@ class TaleMenu extends FlxState
 
 		switch (selection.toLowerCase())
 		{
+			case 'sinco':
+				FlxG.switchState(() -> new SincoTaleSelect());
+
 			default:
 				trace('No case for $selection');
 		}
