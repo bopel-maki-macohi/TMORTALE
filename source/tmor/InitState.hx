@@ -18,7 +18,7 @@ class InitState extends FlxState
 
 	function getInitialState():FlxState
 	{
-		#if TALESMENU
+		#if (TALESMENU || TALESMENU_STARTING)
 		return new TaleMenu();
 		#end
 

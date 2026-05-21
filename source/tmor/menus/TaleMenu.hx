@@ -52,7 +52,7 @@ class TaleMenu extends FlxState
 		if (Controls.accept.justPressed)
 			select();
 
-		#if !TALESMENU
+		#if !TALESMENU_STARTING
 		if (Controls.leave.justPressed)
 			FlxG.switchState(() -> new MainMenu());
 		#end
