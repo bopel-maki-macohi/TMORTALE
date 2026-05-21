@@ -3,7 +3,7 @@ package tmor;
 import flixel.FlxG;
 import flixel.FlxState;
 import tmor.backend.assets.AssetPathPreset;
-import tmor.menus.MainMenu;
+import tmor.menus.*;
 
 class InitState extends FlxState
 {
@@ -18,6 +18,10 @@ class InitState extends FlxState
 
 	function getInitialState():FlxState
 	{
+		#if TALESMENU
+		return new TaleMenu();
+		#end
+
 		return new MainMenu();
 	}
 }

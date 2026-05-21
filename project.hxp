@@ -72,6 +72,8 @@ class Project extends HXProject
 
 	function setupDefines()
 	{
+		setHaxedef("TALESMENU");
+
 		addHaxeFlag('-dce full');
 
 		// Flixel
