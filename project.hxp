@@ -3,7 +3,10 @@ import hxp.*;
 import lime.tools.*;
 
 /**
- * The engine"s project class.
+ * Project HXP project shit
+ * base: WTFEngine
+ * 
+ * docs: https://lime.openfl.org/docs/project-files/hxp-format/
  */
 class Project extends HXProject
 {
