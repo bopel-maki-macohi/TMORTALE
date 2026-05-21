@@ -9,18 +9,7 @@ import flixel.util.FlxColor;
 
 class MainMenu extends FlxState
 {
-	var entries:Array<String> = [
-		'TestOption1',
-		'TestOption2',
-		'TestOption3',
-		'TestOption4',
-		'TestOption5',
-		'TestOption6',
-		'TestOption7',
-		'TestOption8',
-		'TestOption9',
-		'TestOption0',
-	];
+	var entries:Array<String> = ['Tales',];
 
 	var textGrp:FlxTypedGroup<FlxText>;
 
@@ -55,10 +44,13 @@ class MainMenu extends FlxState
 	{
 		super.update(elapsed);
 
-        if (Controls.ui_up.justPressed)
+		if (Controls.ui_up.justPressed)
 			changeSelection(-1);
-        if (Controls.ui_down.justPressed)
+		if (Controls.ui_down.justPressed)
 			changeSelection(1);
+
+		if (Controls.accept.justPressed)
+			select();
 	}
 
 	function changeSelection(by:Int)
@@ -79,6 +71,20 @@ class MainMenu extends FlxState
 				camFollow.y = -(FlxG.height * 0.75) + text.y;
 				text.color = FlxColor.YELLOW;
 			}
+		}
+	}
+
+	function select()
+	{
+		var selection:String = entries[curSelection];
+
+		switch (selection.toLowerCase())
+		{
+			case 'tales':
+				FlxG.switchState(() -> new TaleMenu());
+
+			default:
+				trace('No case for $selection');
 		}
 	}
 }
