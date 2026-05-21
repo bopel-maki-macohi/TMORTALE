@@ -55,9 +55,9 @@ class MainMenu extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.anyJustPressed([W, UP]))
+        if (Controls.ui_up.justPressed)
 			changeSelection(-1);
-		if (FlxG.keys.anyJustPressed([S, DOWN]))
+        if (Controls.ui_down.justPressed)
 			changeSelection(1);
 	}
 
