@@ -44,9 +44,9 @@ class TaleMenu extends FlxState
 	{
 		super.update(elapsed);
 
-		if (Controls.ui_up.justPressed)
+		if (Controls.ui_left.justPressed)
 			changeSelection(-1);
-		if (Controls.ui_down.justPressed)
+		if (Controls.ui_right.justPressed)
 			changeSelection(1);
 
 		if (Controls.accept.justPressed)
